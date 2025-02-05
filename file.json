@@ -1,0 +1,44 @@
+description: monitor
+serviceProvider: Promilezi
+assetTag: 24028482sd
+brand: HP
+cost: 12000
+serialNumber: sdfw34345R
+purchaseDate: 2025-01-22
+condition: Good
+category[id]: 2
+category[name]: ICT Equipment
+department[id]: 1
+department[name]: IT
+site[id]: 1
+site[name]: Sunninghil
+location[id]: 1
+location[name]: Office
+assetStatus[id]: 1
+assetStatus[name]: Active
+isDepreciable: no
+vehicleMake[id]: 
+vehicleMake[name]: 
+vin: 
+licensePlate: 
+servicePlanPeriod: 
+dueForService: 
+servicePlanExpiration: 
+discExpiration: 
+lastMaintenanceDate: 
+entity_model: hp
+warrantyPeriod: 3
+warrantyExpiration: 2027-01-27
+deviceStatus: 
+licenseType: 
+supplier: 
+licenseKey: 
+numberOfSeats: 
+renewalDate: 
+supportContact: 
+purchaseOrderNumber: 98093
+invoiceNumber: 424242
+entity_model: hp
+warrantyPeriod: 3
+warrantyExpiration: 2027-01-27
+depreciationMethod: 
