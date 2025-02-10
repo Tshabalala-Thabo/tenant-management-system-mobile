@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Text } from '@/components/Themed';
+import { ThemedText as Text } from '@/components/ThemedText';
 import { Link } from 'expo-router';
-import ThemedView from '@/components/ThemedView';
+import { ThemedView } from '@/components/ThemedView';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function ForgotPasswordScreen() {
