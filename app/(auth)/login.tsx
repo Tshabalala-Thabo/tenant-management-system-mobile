@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { ThemedText as Text } from '@/components/ThemedText';
 import { Link } from 'expo-router';
 import { ThemedView } from '@/components/ThemedView';
@@ -20,7 +20,10 @@ export default function LoginScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <Text style={styles.title}>Welcome Back</Text>
+      <Image
+        source={require('@/assets/images/logo_black.png')}
+        style={styles.logo}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -72,6 +75,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
+    marginBottom: 0,
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 24,
