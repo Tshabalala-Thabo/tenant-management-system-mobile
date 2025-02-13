@@ -7,7 +7,9 @@ import { useAuth } from '@/hooks/useAuth';
 
 export default function SignUpScreen() {
   const [fullName, setFullName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { signUp, isLoading } = useAuth();
@@ -18,7 +20,7 @@ export default function SignUpScreen() {
         alert('Passwords do not match');
         return;
       }
-      await signUp(fullName, email, password);
+      await signUp(fullName, lastName, email, password, phone);
     } catch (error) {
       alert('Sign up failed. Please try again.');
     }
@@ -31,10 +33,19 @@ export default function SignUpScreen() {
         
         <TextInput
           style={styles.input}
-          placeholder="Full Name"
+          placeholder="First Name"
           placeholderTextColor="#666"
           value={fullName}
           onChangeText={setFullName}
+          editable={!isLoading}
+        />
+        
+        <TextInput
+          style={styles.input}
+          placeholder="Last Name"
+          placeholderTextColor="#666"
+          value={lastName}
+          onChangeText={setLastName}
           editable={!isLoading}
         />
         
@@ -46,6 +57,16 @@ export default function SignUpScreen() {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          editable={!isLoading}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Phone Number"
+          placeholderTextColor="#666"
+          value={phone}
+          onChangeText={setPhone}
+          keyboardType="phone-pad"
           editable={!isLoading}
         />
         

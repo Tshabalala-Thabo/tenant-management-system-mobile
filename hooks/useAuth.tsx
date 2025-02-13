@@ -14,7 +14,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (fullName: string, email: string, password: string) => Promise<void>;
+  signUp: (fullName: string, lastName: string, email: string, password: string, phone: string) => Promise<void>;
   signOut: () => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
 }
@@ -60,26 +60,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const signUp = async (fullName: string, email: string, password: string) => {
+  const signUp = async (fullName: string, lastName: string, email: string, password: string, phone: string) => {
     try {
-      setIsLoading(true);
-      // TODO: Implement actual API call to your backend
-      // This is a mock implementation
-      const mockUser = {
-        id: '1',
-        email,
-        fullName,
-      };
+      const response = await api.post('/register', {
+          name: fullName,
+          last_name: lastName,
+          email,
+          password,
+          phone,
+      });
 
-      await AsyncStorage.setItem('user', JSON.stringify(mockUser));
-      setUser(mockUser);
-      router.replace('/(tabs)');
-    } catch (error) {
-      console.error('Sign up error:', error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+      const { access_token, user } = response.data;
+
+      // Store the token in AsyncStorage
+      await AsyncStorage.setItem('authToken', access_token);
+
+      return user; // Return the user data
+  } catch (error) {
+      console.error((error as any).response?.data?.message || 'Registration failed');
+      throw new Error(((error as any).response?.data?.message as string) || 'Registration failed');
+  }
   };
 
   const signOut = async () => {
