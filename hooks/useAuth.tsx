@@ -1,6 +1,8 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '@/lib/axios'
+
 
 interface User {
   id: string;
@@ -45,23 +47,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      setIsLoading(true);
-      // TODO: Implement actual API call to your backend
-      // This is a mock implementation
-      const mockUser = {
-        id: '1',
-        email,
-        fullName: 'Test User',
-      };
-      
-      await AsyncStorage.setItem('user', JSON.stringify(mockUser));
-      setUser(mockUser);
-      router.replace('/(tabs)');
-    } catch (error) {
-      console.error('Sign in error:', error);
-      throw error;
-    } finally {
-      setIsLoading(false);
+      const response = await api.post('/login', { email, password });
+      const { access_token, user } = response.data;
+
+      // Store the token in AsyncStorage
+      await AsyncStorage.setItem('authToken', access_token);
+
+      return user; // Return the user data
+    } catch (error: any) {
+      console.error(error.response?.data?.message || 'Login failed');
+      throw new Error(error.response?.data?.message || 'Login failed');
     }
   };
 
@@ -75,7 +70,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         fullName,
       };
-      
+
       await AsyncStorage.setItem('user', JSON.stringify(mockUser));
       setUser(mockUser);
       router.replace('/(tabs)');
@@ -117,13 +112,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider value={{
-        user,
-        isLoading,
-        signIn,
-        signUp,
-        signOut,
-        forgotPassword,
-      }}>
+      user,
+      isLoading,
+      signIn,
+      signUp,
+      signOut,
+      forgotPassword,
+    }}>
       {children}
     </AuthContext.Provider>
   );
