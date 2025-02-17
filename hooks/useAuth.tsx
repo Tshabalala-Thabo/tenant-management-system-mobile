@@ -46,16 +46,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const signIn = async (email: string, password: string) => {
+    console.log('📝 Starting login process for:', email);
     try {
+      console.log('🔄 Making login request...');
       const response = await api.post('/login', { email, password });
+      console.log('📦 Login response received:', response.data);
+
       const { access_token, user } = response.data;
 
-      // Store the token in AsyncStorage
+      console.log('🔑 Storing auth token...');
       await AsyncStorage.setItem('authToken', access_token);
+      
+      console.log('👤 Storing user data...');
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+      
+      console.log('✅ Setting user state...');
+      setUser(user);
 
-      return user; // Return the user data
+      console.log('🔄 Navigating to tabs...');
+      router.replace('/(tabs)');
+      
+      return user;
     } catch (error: any) {
-      console.error(error.response?.data?.message || 'Login failed');
+      console.error('❌ Login Error:', {
+        message: error.response?.data?.message || error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
       throw new Error(error.response?.data?.message || 'Login failed');
     }
   };
