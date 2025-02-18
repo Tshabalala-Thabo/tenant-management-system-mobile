@@ -52,7 +52,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await api.post('/login', { email, password });
       console.log('📦 Login response received:', response.data);
 
-      const { access_token, user } = response.data;
+      const access_token = response.data.token;
+      const user = response.data.user;
+
+      console.log('response.data.token: ', response.data.token)
 
       console.log('🔑 Storing auth token...');
       await AsyncStorage.setItem('authToken', access_token);
