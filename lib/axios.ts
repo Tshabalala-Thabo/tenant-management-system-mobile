@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const api = axios.create({
-    baseURL: 'https://ddac-102-22-207-246.ngrok-free.app/api',
+    baseURL: 'https://1412-102-22-207-246.ngrok-free.app/api',
 });
 
 // Add an interceptor to attach the token to each request

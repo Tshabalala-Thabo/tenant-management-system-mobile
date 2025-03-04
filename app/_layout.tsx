@@ -9,36 +9,8 @@ import "../global.css";
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
-
-SplashScreen.preventAutoHideAsync();
-
-function RootLayoutNav({ colorScheme }: { colorScheme: 'light' | 'dark' }) {
-  const { isLoading: loading, user } = useAuth();
-  const segments = useSegments();
-
-  useEffect(() => {
-    if (!loading) {
-      const inAuthGroup = segments[0] === '(auth)';
-      
-      if (!user && !inAuthGroup) {
-        router.replace('/(auth)/login');
-      } else if (user && inAuthGroup) {
-        router.replace('/(tabs)');
-      }
-    }
-  }, [user, loading, segments]);
-
-  if (loading) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Slot />
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
-}
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -57,8 +29,10 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
-      <RootLayoutNav colorScheme={colorScheme ?? 'light'} />
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <RootLayoutNav colorScheme={colorScheme ?? 'light'} />
+      </AuthProvider>
+    </Provider>
   );
 }
