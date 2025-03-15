@@ -1,53 +1,142 @@
-# Welcome to your Expo app 👋
+# TM System Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native mobile application for the Tenant Management System (TMS), providing landlords and tenants with a convenient way to manage properties, rooms, lease agreements, and invoices on the go.
 
-## Get started
+![TM System Mobile App Banner](https://via.placeholder.com/800x400?text=TM+System+Mobile+App)
 
-1. Install dependencies
+## Screenshots
 
-   ```bash
-   npm install
-   ```
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <img src="https://via.placeholder.com/200x400?text=Login+Screen" alt="Login Screen" width="200" />
+  <img src="https://via.placeholder.com/200x400?text=Dashboard" alt="Dashboard" width="200" />
+  <img src="https://via.placeholder.com/200x400?text=Properties" alt="Properties List" width="200" />
+  <img src="https://via.placeholder.com/200x400?text=Room+Details" alt="Room Details" width="200" />
+</div>
 
-2. Start the app
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 20px;">
+  <img src="https://via.placeholder.com/200x400?text=Tenant+Profile" alt="Tenant Profile" width="200" />
+  <img src="https://via.placeholder.com/200x400?text=Invoices" alt="Invoices" width="200" />
+  <img src="https://via.placeholder.com/200x400?text=Tickets" alt="Support Tickets" width="200" />
+  <img src="https://via.placeholder.com/200x400?text=Applications" alt="Applications" width="200" />
+</div>
 
-   ```bash
-    npx expo start
-   ```
+## Features
 
-In the output, you'll find options to open the app in a
+- **Role-based access** for landlords and tenants
+- **Cross-platform** - works on both iOS and Android
+- **Real-time notifications** for new invoices, ticket updates, and messages
+- **Property management** - view and manage sites and rooms
+- **Tenant management** - handle tenant profiles and lease agreements
+- **Invoice tracking** - view, download, and pay invoices
+- **Support tickets** - create and track maintenance requests
+- **Accommodation applications** - submit and review applications
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Technologies Used
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- React Native
+- Redux for state management
+- React Navigation for routing
+- Axios for API communication
+- React Native Paper for UI components
+- Formik and Yup for form handling and validation
+- AsyncStorage for local data persistence
 
-## Get a fresh project
+## Prerequisites
 
-When you're ready, run:
+Before setting up the mobile app, ensure you have the following:
+
+- Node.js 14.x or later
+- npm or Yarn
+- React Native CLI
+- Android Studio (for Android development)
+- Xcode (for iOS development, Mac only)
+- A running instance of the [TM System Laravel Backend](https://github.com/Tshabalala-Thabo/TenantManagementSystem)
+
+## Setup Instructions
+
+### Step 1: Clone the Repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/Tshabalala-Thabo/TenantManagementSystem-Mobile.git
+cd TenantManagementSystem-Mobile
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Step 2: Install Dependencies
 
-## Learn more
+```bash
+npm install
+# or
+yarn install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### Step 3: Configure Environment Variables
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Create a `.env` file in the root directory:
 
-## Join the community
+```
+API_URL=http://your-laravel-backend-url/api
+```
 
-Join our community of developers creating universal apps.
+Replace `your-laravel-backend-url` with the URL where your Laravel backend is hosted.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Step 4: Configure the Backend
 
+Ensure your Laravel backend is set up correctly following the instructions in the [backend repository](https://github.com/Tshabalala-Thabo/TenantManagementSystem). The backend should be properly configured with:
 
-https://chatgpt.com/share/67a3cce4-11ec-8006-b218-825adb131cd4
+- Database connection
+- API endpoints
+- Authentication system
+- CORS settings to allow requests from the mobile app
+
+### Step 5: Run the Application
+
+#### For Android:
+
+```bash
+# Start Metro bundler
+npx react-native start
+
+# In a new terminal, run on Android
+npx react-native run-android
+```
+
+#### For iOS (Mac only):
+
+```bash
+# Install pods
+cd ios && pod install && cd ..
+
+# Start Metro bundler
+npx react-native start
+
+# In a new terminal, run on iOS
+npx react-native run-ios
+```
+
+## Backend Integration
+
+This mobile app is designed to work with the TM System Laravel backend. For detailed information about the backend API and database schema, refer to the [backend repository README](https://github.com/Tshabalala-Thabo/TenantManagementSystem).
+
+Key integration points:
+
+- **Authentication**: JWT-based authentication with the Laravel backend
+- **API Endpoints**: RESTful API communication for all data operations
+- **Real-time Updates**: WebSocket integration for notifications and real-time data updates
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- The Laravel backend was developed by Thabo Tshabalala
+- React Native framework and community
+- All contributors to this project
